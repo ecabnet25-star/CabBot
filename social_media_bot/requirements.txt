@@ -1,0 +1,6 @@
+pyqt5
+apscheduler
+requests
+tweepy
+praw
+requests-oauthlib

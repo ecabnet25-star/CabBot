@@ -1,0 +1,54 @@
+# How to Upload and Download the Social Media Bot App
+
+## For the App Owner (You)
+
+### Uploading the App
+1. **Prepare the Folder:**
+   - Ensure all source files, requirements.txt, README.md, and .gitignore are present in the `social_media_bot` folder.
+   - Remove any sensitive files (tokens, .db, .json) before uploading.
+2. **Create a Repository:**
+   - Go to GitHub (or your preferred platform) and create a new repository (e.g., `social-media-bot-desktop`).
+3. **Initialize Git (if not already):**
+   ```
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git remote add origin <your-repo-url>
+   git push -u origin main
+   ```
+4. **Upload to Cloud Storage (optional):**
+   - Zip the folder and upload to Google Drive, Dropbox, or similar for direct download.
+
+## For Users (Download & Run)
+
+### Downloading
+1. **From GitHub:**
+   - Go to the repository page and click "Code" > "Download ZIP".
+   - Or clone with Git:
+     ```
+     git clone <repo-url>
+     ```
+2. **From Cloud Storage:**
+   - Download the provided ZIP file and extract it.
+
+### Running the App
+1. **Install Python 3.8+**
+2. **Install dependencies:**
+   ```
+   pip install -r requirements.txt
+   ```
+3. **Set up Reddit API credentials as environment variables:**
+   - `REDDIT_CLIENT_ID`
+   - `REDDIT_CLIENT_SECRET`
+4. **Run the app:**
+   ```
+   python main.py
+   ```
+5. **Connect your social accounts in the app and start scheduling posts!**
+
+---
+
+**Note:**
+- Instagram and Facebook posting are not yet implemented (UI only).
+- The app must remain open for scheduled posts to be delivered.
+- Do not share your token or database files publicly.
