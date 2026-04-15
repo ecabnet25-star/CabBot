@@ -1,3 +1,4 @@
+import os
 # Instagram and Facebook stubs
 import requests
 import time
