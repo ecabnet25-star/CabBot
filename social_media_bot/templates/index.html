@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Social Media Bot (Web)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        label, input, textarea { display: block; margin-bottom: 1em; }
+        .platforms label { display: inline-block; margin-right: 1em; }
+        button { padding: 0.5em 1em; }
+    </style>
+</head>
+<body>
+    <h1>Social Media Bot (Web)</h1>
+    <form id="postForm">
+        <label>Post Text:
+            <textarea name="text" id="text" rows="4" cols="50" required></textarea>
+        </label>
+        <div class="platforms">
+            <label><input type="checkbox" name="platforms" value="x"> X (Twitter)</label>
+            <label><input type="checkbox" name="platforms" value="reddit"> Reddit</label>
+            <label><input type="checkbox" name="platforms" value="telegram"> Telegram</label>
+            <label><input type="checkbox" name="platforms" value="instagram"> Instagram</label>
+            <label><input type="checkbox" name="platforms" value="facebook"> Facebook</label>
+        </div>
+        <label>Schedule Time (optional):
+            <input type="datetime-local" id="datetime" name="datetime">
+        </label>
+        <button type="submit">Post / Schedule</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        document.getElementById('postForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const text = document.getElementById('text').value;
+            const platforms = Array.from(document.querySelectorAll('input[name="platforms"]:checked')).map(cb => cb.value);
+            const datetime = document.getElementById('datetime').value;
+            let url, payload;
+            if (datetime) {
+                url = '/api/schedule';
+                payload = { text, platforms, datetime };
+            } else {
+                url = '/api/post';
+                payload = { text, platforms };
+            }
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            document.getElementById('result').textContent = data.success ? 'Success!' : ('Error: ' + (data.error || 'Unknown error'));
+        };
+    </script>
+</body>
+</html>
